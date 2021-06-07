@@ -19,8 +19,8 @@ public class DataInstanceClassifier {
         DataInstanceClassifier dIC = new DataInstanceClassifier();
 
         //dIC.createJ48Model();
-        dIC.EvaluateModel("J48.model");
-        //dIC.testClassifier(new TeamDTO(20, 56, "Yes", 78));
+        //dIC.EvaluateModel("J48.model");
+        dIC.testClassifier(new TeamDTO(20, 56, "Yes", 78));
     }
 
     private void testClassifier(TeamDTO teamDTO) {
