@@ -1,6 +1,7 @@
 package service;
 
 import dtos.TeamDTO;
+import models.Team;
 import weka.classifiers.Classifier;
 import weka.classifiers.trees.J48;
 import weka.classifiers.Evaluation;
@@ -20,7 +21,7 @@ public class DataInstanceClassifier {
 
         //dIC.createJ48Model();
         //dIC.EvaluateModel("J48.model");
-        dIC.testClassifier(new TeamDTO(20, 56, "Yes", 78));
+        //dIC.testClassifier(new TeamDTO(20, 56, true, 78));
     }
 
     private void testClassifier(TeamDTO teamDTO) {
@@ -37,7 +38,7 @@ public class DataInstanceClassifier {
     }
 
     public Boolean getTeamClassification(TeamDTO teamDTO) {
-        double result = classify(teamDTO);
+        double result = classify(new Team(teamDTO));
         if (result == 1.0) {
             return false;
         }
@@ -47,7 +48,7 @@ public class DataInstanceClassifier {
         return null;
     }
 
-    private double classify(TeamDTO teamDTO) {
+    private double classify(Team team) {
         double result = -1;
         try {
             ArrayList<String> classVal = new ArrayList<>();
@@ -73,10 +74,10 @@ public class DataInstanceClassifier {
             DenseInstance instance = new DenseInstance(dataset.numAttributes());
             instance.setDataset(dataset);
             dataset.add(instance);
-            instance.setValue(avgCommunicationScore, teamDTO.getAvgCommunicationScore());
-            instance.setValue(avgExperienceScore, teamDTO.getAvgExperienceScore());
-            instance.setValue(hasVettedLeader, teamDTO.getHasVettedLeader());
-            instance.setValue(teamSynergyScore, teamDTO.getTeamSynergyScore());
+            instance.setValue(avgCommunicationScore, team.getAvgCommunicationScore());
+            instance.setValue(avgExperienceScore, team.getAvgExperienceScore());
+            instance.setValue(hasVettedLeader, team.getHasVettedLeader());
+            instance.setValue(teamSynergyScore, team.getTeamSynergyScore());
 
             if (cls == null) {
                 cls = (Classifier) SerializationHelper.read("J48.model");

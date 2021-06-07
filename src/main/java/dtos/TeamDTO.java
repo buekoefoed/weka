@@ -1,12 +1,15 @@
 package dtos;
 
 public class TeamDTO {
-    private final int avgCommunicationScore;
-    private final int avgExperienceScore;
-    private final String hasVettedLeader;
-    private final int teamSynergyScore;
+    private int avgCommunicationScore;
+    private int avgExperienceScore;
+    private boolean hasVettedLeader;
+    private int teamSynergyScore;
 
-    public TeamDTO(int avgCommunicationScore, int avgExperienceScore, String hasVettedLeader, int teamSynergyScore) {
+    public TeamDTO() {
+    }
+
+    public TeamDTO(int avgCommunicationScore, int avgExperienceScore, boolean hasVettedLeader, int teamSynergyScore) {
         this.avgCommunicationScore = avgCommunicationScore;
         this.avgExperienceScore = avgExperienceScore;
         this.hasVettedLeader = hasVettedLeader;
@@ -21,7 +24,7 @@ public class TeamDTO {
         return avgExperienceScore;
     }
 
-    public String getHasVettedLeader() {
+    public boolean getHasVettedLeader() {
         return hasVettedLeader;
     }
 
